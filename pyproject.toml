@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "versioneer[toml]"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gbmgeometry"
+description = "Geometry calculations for Fermi GBM"
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.8.0"
+license = {text = "BSD"}
+authors = [
+    {name = "J. Michael Burgess", email = "jmichaelburgess@gmail.com"}
+]
+dynamic = ["version"]
+dependencies = [
+    "numba",
+    "numpy",
+    "matplotlib",
+    "pyerfa",
+    "astropy",
+    "sympy",
+    "healpy",
+    "spherical_geometry",
+    "h5py",
+    "ipywidgets",
+    "jupyter",
+    "ipyvolume>=0.6.0a2",
+]
+
+[project.urls]
+Homepage = "https://github.com/grburgess/gbmgeometry"
+"Bug Tracker" = "https://github.com/grburgess/gbmgeometry/issues"
+"Source Code" = "https://github.com/grburgess/gbmgeometry"
+
+[project.scripts]
+get_trigdat = "gbmgeometry.cli.get_trigdat:main"
+get_posthist = "gbmgeometry.cli.get_posthist:main"
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-codecov",
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.setuptools.package-data]
+gbmgeometry = ["data/**/*"]
+
+[tool.versioneer]
+VCS = "git"
+style = "pep440"
+versionfile_source = "gbmgeometry/_version.py"
+versionfile_build = "gbmgeometry/_version.py"
+tag_prefix = "v"
+parentdir_prefix = "gbmgeometry-"
